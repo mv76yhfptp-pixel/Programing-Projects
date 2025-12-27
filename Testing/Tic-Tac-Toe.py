@@ -4,6 +4,7 @@ from tkinter import messagebox
 root = tk.Tk()
 root.title("Tic Tac Toe")
 
+
 current_player = "X"
 board = [["" for _ in range(3)] for _ in range(3)]
 buttons = [[None for _ in range(3)] for _ in range(3)]
@@ -59,6 +60,10 @@ def reset_game():
             board[r][c] = ""
             buttons[r][c].config(text="")
 
+def closing():
+    if messagebox.askyesno(title='Quit?', message="You want to close Tic-Tac-Toe?"):
+        root.destroy()
+
 for r in range(3):
     for c in range(3):
         buttons[r][c] = tk.Button(
@@ -71,7 +76,7 @@ for r in range(3):
         buttons[r][c].grid(row=r, column=c)
         buttons[r][c].grid(row=r, column=c)
 
-
+root.protocol("WM_DELETE_WINDOW", closing)
 reset_btn = tk.Button(root, text="Reset", command=reset_game)
 reset_btn.grid(row=3, column=0, columnspan=3, sticky="we")
 
